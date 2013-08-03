@@ -1,0 +1,19 @@
+Instructions:
+insert keyword; get kanji.
+
+separate each keyword with commas to make compound words,like this:
+	spirit,hold,chi,bad,i
+
+this would be processed as:
+	気持ち悪い
+
+The text in the box is separated from the commas, then each of them is
+matched to a dictionary stored in the data.js.  In case there is no
+match, we use the difflib.js module (http://qiao.github.io/difflib.js/)
+to do autocomplete magic.
+
+heisigme.py is the original non-js script.
+
+If anyone is actually reading this, I do have questions how to attribute
+works from github and how this whole git thing works in general. So
+please help me on my journey :)
