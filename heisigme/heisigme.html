@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="data.js">
+</script>
+<script type="text/javascript" src="./difflib.js">
+</script>
+<style type="text/css">
+body{
+	font-size: 12px;
+	font-family: "Arial", sans-serif;
+	color: #666;
+}
+#footnote{
+	margin: 20px;
+	width: 300px;
+}
+#tbox{
+	font-size: 24px;
+	width:300px;
+	border: 1px #ccc solid;
+	margin: 20px;
+}
+#butt{
+	width:300px;
+	height: 40px;
+	border: 1px #999 solid;
+	margin: 20px;
+}
+#output{
+	font-size: 24px;
+	border: 1px #ccc solid;
+	width:300px;
+	margin: 20px;
+}
+</style>
+</head>
+<body>
+<form action="#">
+<input id="tbox" type="text" value="" /><br />
+<input id="butt" type="submit" value="Heisig-read" onClick="buttonClick();" />
+<br />
+<input id="output" type="text" value="" />
+</form>
+<br />
+<div id="footnote">
+	insert keyword; get kanji.<br />
+	separate each keyword with commas to make compound words.<br />
+	like this: <br />
+	spirit,hold,chi,bad,i<br />
+	</div>
+</body>
+<script type="text/javascript">
+function buttonClick(){
+	tbox = document.getElementById("tbox");
+	out = document.getElementById("output");
+	footnote = document.getElementById("footnote");
+	tbvs = tbox.value.split(",");
+	out.value = "";
+	footnote.innerHTML = "";
+	maybe = 0;
+	for(i=0;i<tbvs.length;i++){
+		if(dictdata[tbvs[i]] == undefined){
+			matches = difflib.getCloseMatches(tbvs[i],Object.keys(dictdata));
+			if(matches == ""){
+				out.value += "?";
+			}
+			else{
+				out.value += dictdata[matches[0]];
+				footnote.innerHTML += dictdata[matches[0]] + " = " + matches[0] + "<br />";
+				maybe = 1;
+			}
+		}
+		else out.value += dictdata[tbvs[i]];
+	}
+	if(maybe == 1) out.value = "~" + out.value;
+}
+</script>
+</html>
