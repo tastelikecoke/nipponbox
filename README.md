@@ -9,7 +9,8 @@ dir
 	re-encodes broken Japanese ebooks
 * syncer.py
 	compares two directories
-	
+* librarian.py
+	catalogs and compares directories
 
 heisigme
 --------
